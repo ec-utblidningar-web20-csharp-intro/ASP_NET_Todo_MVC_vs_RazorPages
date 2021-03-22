@@ -26,6 +26,7 @@ namespace AspNetCore_MVC_Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddDbContext<TodoDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TodoDbContext")));
@@ -56,6 +57,7 @@ namespace AspNetCore_MVC_Demo
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Todo}/{action=Index}");
+                endpoints.MapRazorPages();
             });
         }
     }
