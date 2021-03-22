@@ -1,7 +1,7 @@
 ﻿@page
-@model IndexModel
+@model CompletedModel
 @{
-    ViewData["Title"] = "My Todos";
+    ViewData["Title"] = "Completed Todos";
 }
 
 <table class="table">
@@ -37,31 +37,7 @@
             <td>
                 @(item.IsDone ? item.EndedOn : "")
             </td>
-            <td>
-                @if (!item.IsDone)
-                {
-                    <a asp-route-id="@item.Id">
-                        <button>
-                            Finish
-                        </button>
-                    </a>
-                }
-            </td>
         </tr>
         }
-        <tr>
-            <form method="post">
-                <td>
-                </td>
-                <td>
-                    <input asp-for="NewTodo.Mission"/>
-                </td>
-                <td>
-                </td>
-                <td>
-                    <input type="submit" value="Add ToDo"/>
-                </td>
-            </form>
-        </tr>
     </tbody>
 </table>

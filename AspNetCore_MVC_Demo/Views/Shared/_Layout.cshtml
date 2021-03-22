@@ -10,22 +10,28 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <div class="justify-content-end">
+            <div class="container d-flex justify-content-around">
+                <div class="">
                     <h3 class="text-muted">@ViewData["Title"]</h3>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Index">My Todos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="All">All Todos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Current">Current Todos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Completed">Completed Todos</a>
                         </li>
                     </ul>
                 </div>
-                <a class="navbar-brand" asp-page="/RazorPage/Index">View Razor Page</a>
+                <a class="navbar-brand" asp-page="/RazorPage/All">View Razor Page</a>
             </div>
         </nav>
     </header>

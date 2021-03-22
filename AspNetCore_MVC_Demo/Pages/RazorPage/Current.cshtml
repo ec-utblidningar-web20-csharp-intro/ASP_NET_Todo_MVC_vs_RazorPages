@@ -1,6 +1,7 @@
-﻿@model AspNetCore_MVC_Demo.Controllers.TodoController
+﻿@page
+@model CurrentModel
 @{
-    ViewData["Title"] = "My Todos";
+    ViewData["Title"] = "Current Todos";
 }
 
 <table class="table">
@@ -39,7 +40,7 @@
             <td>
                 @if (!item.IsDone)
                 {
-                    <a asp-action="Complete" asp-route-id="@item.Id">
+                    <a asp-route-id="@item.Id">
                         <button>
                             Finish
                         </button>
@@ -49,16 +50,16 @@
         </tr>
         }
         <tr>
-            <form method="post" asp-action="Add">
+            <form method="post">
                 <td>
                 </td>
                 <td>
-                    <input asp-for="NewTodo.Mission" />
+                    <input asp-for="NewTodo.Mission"/>
                 </td>
                 <td>
                 </td>
                 <td>
-                    <input type="submit" value="Add ToDo" />
+                    <input type="submit" value="Add ToDo"/>
                 </td>
             </form>
         </tr>

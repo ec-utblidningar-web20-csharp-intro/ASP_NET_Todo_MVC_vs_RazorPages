@@ -23,10 +23,28 @@ namespace AspNetCore_MVC_Demo.Controllers
         }
 
         public List<Todo> Todos { get; set; }
-        public async Task<IActionResult> Index()
+        public string Title { get; set; }
+        public async Task<IActionResult> All()
         {
+            Title = "All Todos";
             Todos = await _context.Todos.ToListAsync();
-            return View(this);
+            return View("Todo", this);
+        }
+        public async Task<IActionResult> Current()
+        {
+            Title = "Current Todos";
+            Todos = await _context.Todos.Where(t => !t.IsDone).ToListAsync();
+            return View("Todo", this);
+        }
+        public async Task<IActionResult> Completed()
+        {
+            Title = "Completed Todos";
+            Todos = await _context.Todos.Where(t => t.IsDone).ToListAsync();
+            return View("TodoNoAdd", this);
+        }
+        public IActionResult Index()
+        {
+            return RedirectToAction("All");
         }
 
         [BindProperty]

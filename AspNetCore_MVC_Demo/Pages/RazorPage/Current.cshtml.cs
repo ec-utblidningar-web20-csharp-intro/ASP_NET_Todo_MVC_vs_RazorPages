@@ -10,11 +10,11 @@ using AspNetCore_MVC_Demo.Models;
 
 namespace AspNetCore_MVC_Demo.Pages
 {
-    public class IndexModel : PageModel
+    public class CurrentModel : PageModel
     {
         private readonly TodoDbContext _context;
 
-        public IndexModel(TodoDbContext context)
+        public CurrentModel(TodoDbContext context)
         {
             _context = context;
         }
@@ -32,7 +32,7 @@ namespace AspNetCore_MVC_Demo.Pages
                 await _context.SaveChangesAsync();
             }
 
-            Todos = await _context.Todos.ToListAsync();
+            Todos = await _context.Todos.Where(t => t.IsDone).ToListAsync();
         }
 
         [BindProperty]
