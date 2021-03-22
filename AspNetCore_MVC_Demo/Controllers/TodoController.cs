@@ -22,9 +22,26 @@ namespace AspNetCore_MVC_Demo.Controllers
             _context = context;
         }
 
+        public List<Todo> Todos { get; set; }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Todos.ToListAsync());
+            Todos = await _context.Todos.ToListAsync();
+            return View(this);
+        }
+
+        [BindProperty]
+        public Todo NewTodo { get; set; }
+
+        [HttpPost]
+        public async Task<IActionResult> Add()
+        {
+            NewTodo.CreatedOn = DateTime.Now;
+            NewTodo.User = await _context.Users.FirstOrDefaultAsync();
+
+            await _context.AddAsync(NewTodo);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Error()

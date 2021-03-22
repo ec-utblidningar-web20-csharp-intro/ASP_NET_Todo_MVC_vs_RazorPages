@@ -19,11 +19,23 @@ namespace AspNetCore_MVC_Demo.Pages
             _context = context;
         }
 
-        public List<Todo> Todo { get;set; }
-
+        public List<Todo> Todos { get;set; }
         public async Task OnGetAsync()
         {
-            Todo = await _context.Todos.ToListAsync();
+            Todos = await _context.Todos.ToListAsync();
+        }
+
+        [BindProperty]
+        public Todo NewTodo { get; set; }
+        public async Task OnPostAsync()
+        {
+            NewTodo.CreatedOn = DateTime.Now;
+            NewTodo.User = await _context.Users.FirstOrDefaultAsync();
+
+            await _context.AddAsync(NewTodo);
+            await _context.SaveChangesAsync();
+
+            Todos = await _context.Todos.ToListAsync();
         }
     }
 }

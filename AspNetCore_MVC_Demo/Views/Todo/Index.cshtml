@@ -1,4 +1,4 @@
-﻿@model List<Todo>
+﻿@model AspNetCore_MVC_Demo.Controllers.TodoController
 @{
     ViewData["Title"] = "My Todos";
 }
@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Todos)
         {
             <tr>
                 <td>
@@ -38,5 +38,19 @@
                 </td>
             </tr>
         }
+        <tr>
+            <form method="post" asp-action="Add">
+                <td>
+                </td>
+                <td>
+                    <input asp-for="NewTodo.Mission" />
+                </td>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" value="Add ToDo" />
+                </td>
+            </form>
+        </tr>
     </tbody>
 </table>
