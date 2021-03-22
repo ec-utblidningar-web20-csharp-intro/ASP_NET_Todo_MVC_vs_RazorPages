@@ -23,20 +23,30 @@
     <tbody>
         @foreach (var item in Model.Todos)
         {
-            <tr>
-                <td>
-                    @(item.IsDone ? "✓" : "")
-                </td>
-                <td>
-                    @item.Mission
-                </td>
-                <td>
-                    @item.CreatedOn
-                </td>
-                <td>
-                    @(item.IsDone ? item.EndedOn : "")
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @(item.IsDone ? "✓" : "")
+            </td>
+            <td>
+                @item.Mission
+            </td>
+            <td>
+                @item.CreatedOn
+            </td>
+            <td>
+                @(item.IsDone ? item.EndedOn : "")
+            </td>
+            <td>
+                @if (!item.IsDone)
+                {
+                    <a asp-action="Complete" asp-route-id="@item.Id">
+                        <button>
+                            Finish
+                        </button>
+                    </a>
+                }
+            </td>
+        </tr>
         }
         <tr>
             <form method="post" asp-action="Add">

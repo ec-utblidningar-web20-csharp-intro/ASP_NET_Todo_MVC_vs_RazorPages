@@ -31,7 +31,6 @@ namespace AspNetCore_MVC_Demo.Controllers
 
         [BindProperty]
         public Todo NewTodo { get; set; }
-
         [HttpPost]
         public async Task<IActionResult> Add()
         {
@@ -40,6 +39,21 @@ namespace AspNetCore_MVC_Demo.Controllers
 
             await _context.AddAsync(NewTodo);
             await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Complete(int? id)
+        {
+            if (id != null)
+            {
+                var todo = await _context.Todos.FindAsync(id);
+                todo.EndedOn = DateTime.Now;
+                todo.IsDone = true;
+
+                _context.Update(todo);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToAction("Index");
         }
