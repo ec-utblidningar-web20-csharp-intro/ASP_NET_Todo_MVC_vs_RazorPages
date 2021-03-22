@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using AspNetCore_MVC_Demo.Data;
 
 namespace AspNetCore_MVC_Demo
 {
@@ -24,6 +26,9 @@ namespace AspNetCore_MVC_Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<TodoDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TodoDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +40,7 @@ namespace AspNetCore_MVC_Demo
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Todo/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -50,7 +55,7 @@ namespace AspNetCore_MVC_Demo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Todo}/{action=Index}");
             });
         }
     }
