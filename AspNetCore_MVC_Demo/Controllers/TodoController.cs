@@ -21,6 +21,13 @@ namespace AspNetCore_MVC_Demo.Controllers
             _logger = logger;
             _context = context;
         }
+        // Hur man hittar till sin razorpage
+        // Pages/Do/Shop/Buy.cshtml.cs -> /Do/Shop/Buy
+
+        // Hur man hittar till sin MVC controller
+        // Controllers/TodoController.cs
+        // [Todo]Controller.[Index]() -> Todo/Index
+        // [Todo]Controller.[Error]() -> Todo/Error
 
         public List<Todo> Todos { get; set; }
         public string Title { get; set; }
@@ -76,7 +83,7 @@ namespace AspNetCore_MVC_Demo.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Error()
+        public async Task<IActionResult> Error()
         {
             return View();
         }
